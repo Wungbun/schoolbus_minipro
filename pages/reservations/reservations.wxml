@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 未登录状态 -->
+  <view wx:if="{{!userInfo}}" class="login-prompt">
+    <button class="login-button" bindtap="goToLogin">去登录</button>
+  </view>
+
+  <!-- 已登录状态 -->
+  <view wx:if="{{userInfo}}" class="reservations-list">
+    <view wx:if="{{reservations.length === 0}}" class="empty-message">
+      <text>暂无预约记录</text>
+    </view>
+    <view wx:for="{{reservations}}" wx:key="id" class="reservation-item">
+      <view class="reservation-info">
+        <text>车次 ID：{{item.scheduleId}}</text>
+        <text>座位号：{{item.seatNumber}}</text>
+        <text>状态：{{item.status}}</text>
+        <text>创建时间：{{item.createdAt}}</text>
+      </view>
+      <view class="reservation-actions">
+        <button class="action-button detail-button" bindtap="showDetails" data-id="{{item.id}}">查看详情</button>
+        <button class="action-button cancel-button" bindtap="cancelReservation" data-id="{{item.id}}" disabled="{{item.status !== 'confirmed'}}">取消预约</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view wx:if="{{showModal}}" class="modal">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>车次详情</text>
+        <text class="close-button" bindtap="hideDetails">×</text>
+      </view>
+      <view class="modal-body">
+        <view wx:if="{{selectedSchedule && routeInfo.startCampusName && routeInfo.endCampusName}}" class="schedule-info">
+          <text>车次 ID：{{selectedSchedule.id}}</text>
+          <text>线路：{{routeInfo.startCampusName}} - {{routeInfo.endCampusName}}</text>
+          <text>发车时间：{{selectedSchedule.departureTime}}</text>
+          <text>状态：{{selectedSchedule.status}}</text>
+        </view>
+        <view wx:else>
+          <text>加载中...</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

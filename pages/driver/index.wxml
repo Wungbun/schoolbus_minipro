@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 公告部分 -->
+  <view class="announcements">
+    <view class="section-title">公告</view>
+    <view class="announcement-list">
+      <view wx:for="{{announcements}}" wx:key="id" class="announcement-item" bindtap="showAnnouncementDetail" data-id="{{item.id}}">
+        <text>{{item.title}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择起点和终点 -->
+  <view class="search-section">
+    <view class="section-title">查询班次</view>
+    <view class="picker-section">
+      <view class="picker-item">
+        <text>起点：</text>
+        <picker mode="selector" range="{{campuses}}" range-key="name" value="{{startCampusIndex}}" bindchange="bindStartCampusChange">
+          <view class="picker-value">{{campuses[startCampusIndex] ? campuses[startCampusIndex].name : '请选择起点'}}</view>
+        </picker>
+      </view>
+      <view class="picker-item">
+        <text>终点：</text>
+        <picker mode="selector" range="{{campuses}}" range-key="name" value="{{endCampusIndex}}" bindchange="bindEndCampusChange">
+          <view class="picker-value">{{campuses[endCampusIndex] ? campuses[endCampusIndex].name : '请选择终点'}}</view>
+        </picker>
+      </view>
+    </view>
+    <button class="search-button" bindtap="searchRoutes">查询</button>
+  </view>
+
+  <!-- 班次列表 -->
+  <view wx:if="{{showSchedules}}" class="schedules-section">
+    <view class="section-title">班次列表</view>
+    <view class="schedule-list">
+      <view wx:for="{{schedules}}" wx:key="id" class="schedule-item" bindtap="selectSchedule" data-id="{{item.id}}">
+        <text>发车时间：{{item.departureTime}}</text>
+        <text>状态：{{item.status}}</text>
+      </view>
+      <view wx:if="{{schedules.length === 0}}" class="no-data">暂无班次</view>
+    </view>
+  </view>
+
+  <!-- 座位选择 -->
+  <view wx:if="{{showSeats}}" class="seats-section">
+    <view class="section-title">选择座位</view>
+    <view class="seat-info">
+      <text>总座位：{{totalSeats}}</text>
+      <text>可用座位：{{availableSeats}}</text>
+    </view>
+    <view class="seat-list">
+      <view wx:for="{{seats}}" wx:key="seatNumber" class="seat-item {{item.isOccupied ? 'occupied' : ''}}" bindtap="selectSeat" data-seat-number="{{item.seatNumber}}">
+        <text>座位 {{item.seatNumber}}</text>
+      </view>
+    </view>
+    <button class="back-button" bindtap="backToSchedules">返回班次列表</button>
+  </view>
+
+  <!-- 公告详情弹窗 -->
+  <view wx:if="{{showModal}}" class="modal">
+    <view class="modal-content">
+      <view class="modal-title">{{selectedAnnouncement.title}}</view>
+      <view class="modal-body">{{selectedAnnouncement.content}}</view>
+      <button bindtap="hideAnnouncementDetail">关闭</button>
+    </view>
+  </view>
+</view>

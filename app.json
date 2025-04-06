@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/reservations/reservations",
+    "pages/profile/profile",
+    "pages/driver/index",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#409EFF",
+    "navigationBarTitleText": "校车管理",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#409EFF",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/unchoose/gongjiaoche.png",
+        "selectedIconPath": "images/choosed/gongjiaoche.png"
+      },
+      {
+        "pagePath": "pages/reservations/reservations",
+        "text": "预约记录",
+        "iconPath": "images/unchoose/zonghe.png",
+        "selectedIconPath": "images/choosed/zonghe.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/unchoose/geren.png",
+        "selectedIconPath": "images/choosed/geren.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

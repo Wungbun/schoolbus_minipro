@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="form-container">
+    <!-- 登录表单 -->
+    <view wx:if="{{!showRegister}}" class="form">
+      <view class="form-item">
+        <text>用户名</text>
+        <input type="text" placeholder="请输入用户名" bindinput="bindUsernameInput" value="{{formData.username}}" />
+      </view>
+      <view class="form-item">
+        <text>密码</text>
+        <input type="password" placeholder="请输入密码" bindinput="bindPasswordInput" value="{{formData.password}}" />
+      </view>
+      <button class="action-button" bindtap="login">登录</button>
+      <view class="switch-text" bindtap="toggleForm">
+        <text>没有账号？去注册</text>
+      </view>
+    </view>
+
+    <!-- 注册表单 -->
+    <view wx:if="{{showRegister}}" class="form">
+      <view class="form-item">
+        <text>用户名</text>
+        <input type="text" placeholder="请输入用户名" bindinput="bindUsernameInput" value="{{formData.username}}" />
+      </view>
+      <view class="form-item">
+        <text>密码</text>
+        <input type="password" placeholder="请输入密码" bindinput="bindPasswordInput" value="{{formData.password}}" />
+      </view>
+      <view class="form-item">
+        <text>姓名</text>
+        <input type="text" placeholder="请输入姓名" bindinput="bindNameInput" value="{{formData.name}}" />
+      </view>
+      <button class="action-button" bindtap="register">注册</button>
+      <view class="switch-text" bindtap="toggleForm">
+        <text>已有账号？去登录</text>
+      </view>
+    </view>
+  </view>
+</view>
